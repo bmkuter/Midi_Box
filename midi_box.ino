@@ -3,7 +3,6 @@
 #include <Adafruit_MCP4725.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <ESP32Encoder.h>
 
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
 #define SCREEN_HEIGHT 64  // OLED display height, in pixels
@@ -40,8 +39,6 @@ struct MidiClockControl {
 };
 
 MidiClockControl midiClockControl = {false, 120};  // Default: stopped, 60 BPM
-
-ESP32Encoder encoder;
 
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 // The pins for I2C are defined by the Wire-library.
@@ -1065,8 +1062,8 @@ void setup() {
   Wire.begin();
 
   // Initialize encoder
-  pinMode(CLK, INPUT);
-  pinMode(DT, INPUT);
+  pinMode(CLK, INPUT_PULLUP);
+  pinMode(DT, INPUT_PULLUP);
   pinMode(SW, INPUT_PULLUP);
 
   // Begin communication with the DAC
